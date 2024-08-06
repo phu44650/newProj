@@ -9,6 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
+      {/*(index.html vẫn sẽ chạy trc file này) ,các componênts sẽ thường dc nhúng ở đầy(indẽ.js)
+      */}
       <App />
     </React.StrictMode>
   </Provider>
