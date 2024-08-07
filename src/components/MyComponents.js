@@ -1,75 +1,59 @@
 import React from "react";
+import AddUserInfo from "./AddUserInfo";
+import DisplayInfo from "./DisplayInfo";
 
 class MyComponents extends React.Component {
 
   state = {
-    name: 'phu',
-    address: 'bl',
-    age: 23
-  }
-  //c1:viet arrow o day thi o duoi k can arrow cung dc,hoac ca 2 arrow cung dc
-  handleClick = (event) => {
-    console.log('ckicl me');
-    // console.log(event);
-
-    console.log(`my naem is ${this.state.name}`);
-    this.setState({
-      name: 'tri'
-    })
+    listUser: [
+      { id: 1, name: 'phu0', age: '12' },
+      { id: 2, name: 'phu1', age: '53' },
+      { id: 3, name: 'phu2', age: '74' },
+    ]
 
   }
 
-  //c2: nhung bat buoc phia duoi phai la arrow
-  // handleClick (event)  {
-  //   console.log('ckicl me');
-  //   // console.log(event);
+handleAddNewUser=(userObj)=>{
+ // console.log('check data', userObj);
+  // this.setState({
+  //   listUser: [ userObj,...this.state.listUser]
+  // })
 
-  //   console.log(`my naem is ${this.state.name}`);
-  //   this.setState({
-  //     name: 'tri'
-  //   })
+  //c2
+  let listUserClone = [...this.state.listUser]
+  this.setState({
+    listUser: [userObj,...listUserClone]
+  })
+}
 
-  // }
-  handleonMoverOver = (event) => {
-    console.log('ckicl međá');
-
-    //console.log(this);//sự kjác biệt 2 csai này ở từ this
-
-  }
-  handleOnChangeInput = (event) => {
-    this.setState({
-      name: event.target.value
-    })
-
-  }
-
-
-  handleOnSubmit = (event) => {
-    event.preventDefault()  // ngawn chanj vc reload lai trang
-    console.log(this.state);
-    
-  }
   //exténds : keé thauwf
   // ./ là ở thư mục hiện tại vd : ./app.css
   //   ../ là quay về thư mục cha chứa nó   ../src/app.css
   render() {
     //trong day dung cu phap jsx:cho phep viet code js trong html
+
+    {/* bt neeus cuyển props xuống tk con kiểu như age=30 hoạc age= true thì cai jsx sẽ k hiểu dc nên muốn dc thì khai báo như phía dưới  hoạc cho những thứ  đó trong ngoạc nhọn{}d*/ }
+    const myAge = 40
+    const MyInfo = ['ad', 'ads', 'đâsd']
     return (
-      <div>my name
-        {/* thiss dai dien cho classs dang tham chieu */}
-        {this.state.name}
-        <button onMouseOver={this.handleonMoverOver}>hover me</button>
-        <button onClick={(event) => { this.handleClick(event) }}>click me</button>
-        {/* casch tren la viet arrow,cach k can arrow :this.handleClick */}
-        <form onSubmit={(event) => { this.handleOnSubmit(event) }}>
-          <input
-            onChange={(event) => this.handleOnChangeInput(event)}
-            type="text" />
-          <button>submit</button>
-
-        </form>
 
 
+
+      <div>
+
+
+
+
+        <AddUserInfo 
+          handleAddNewUser={this.handleAddNewUser}
+          // truyen di thi k can dau () o func
+
+        />
+        <br></br>
+        <DisplayInfo
+          listUser={this.state.listUser}
+        
+        />
       </div>
     )
   }
