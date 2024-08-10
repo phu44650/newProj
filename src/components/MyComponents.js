@@ -13,18 +13,29 @@ class MyComponents extends React.Component {
 
   }
 
-handleAddNewUser=(userObj)=>{
- // console.log('check data', userObj);
-  // this.setState({
-  //   listUser: [ userObj,...this.state.listUser]
-  // })
+  handleAddNewUser = (userObj) => {
+    // console.log('check data', userObj);
+    // this.setState({
+    //   listUser: [ userObj,...this.state.listUser]
+    // })
 
-  //c2
-  let listUserClone = [...this.state.listUser]
-  this.setState({
-    listUser: [userObj,...listUserClone]
-  })
-}
+    //c2
+    let listUserClone = [...this.state.listUser]
+    this.setState({
+      listUser: [userObj, ...listUserClone]
+    })
+  }
+  handleDeleteUser=(userId)=>{
+    let listUserClone = [...this.state.listUser]
+    listUserClone=listUserClone.filter((item)=>{
+      return item.id !== userId
+      // ví dụ như tri=uyền id=3 vào,filtẻ sẽ lọc ra các item có id khác 3 và cho vào mảng mới,còn csai trùng sẽ k dc cho vào mảng
+    })
+    this.setState({
+      listUser:listUserClone
+    }
+    )
+  }
 
   //exténds : keé thauwf
   // ./ là ở thư mục hiện tại vd : ./app.css
@@ -35,26 +46,38 @@ handleAddNewUser=(userObj)=>{
     {/* bt neeus cuyển props xuống tk con kiểu như age=30 hoạc age= true thì cai jsx sẽ k hiểu dc nên muốn dc thì khai báo như phía dưới  hoạc cho những thứ  đó trong ngoạc nhọn{}d*/ }
     const myAge = 40
     const MyInfo = ['ad', 'ads', 'đâsd']
+
+    // const a = 'dsadsadsadsa'
+    // const b ={a:'dsad'}//neu là obj thi k dung cach thong thuong de in ra man hinh dc ma phai dun log thi se in ra dc o tab cốnle
     return (
 
 
 
-      <div>
+      <>
+
+        {/* {a} */}
+       {/* {console.log(b)}
+       {JSON.stringify(b)} */}
+       {/* convert doi tuong obj sang Json thi oi in dc ra man hinh*/}
+        
+        <div className="a">
 
 
 
-
-        <AddUserInfo 
-          handleAddNewUser={this.handleAddNewUser}
+          <AddUserInfo
+            handleAddNewUser={this.handleAddNewUser}
           // truyen di thi k can dau () o func
 
-        />
-        <br></br>
-        <DisplayInfo
-          listUser={this.state.listUser}
-        
-        />
-      </div>
+          />
+          <br></br>
+          <DisplayInfo
+            listUser={this.state.listUser}
+            handleDeleteUser={this.handleDeleteUser}
+          />
+        </div>
+
+        <div className="b"></div>
+      </>
     )
   }
 }
